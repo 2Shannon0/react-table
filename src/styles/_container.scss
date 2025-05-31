@@ -1,0 +1,12 @@
+@use "./media";
+
+@mixin default {
+    max-width: 144rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 7.2rem;
+
+    @include media.desktop {
+        padding: 0 4rem;
+    }
+}

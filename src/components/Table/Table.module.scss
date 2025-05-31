@@ -1,0 +1,34 @@
+        .table {
+        border-collapse: collapse;
+        border: 0.1rem solid #E6E6E6;
+    
+        .head {
+            font-size: 1.8rem;
+            color: var(--text-dark-header);
+            font-weight: 600;
+            
+            .headRow {
+                background-color: rgb(15 45 105 / 5%);
+                text-align: left;
+    
+                .headBox {
+                    border: 0.1rem solid #E6E6E6;
+                    padding: 0.4rem;
+                }
+            }
+        }
+    
+        .body {
+            font-size: 1.6rem;
+            color: var(--text-dark-normal);
+    
+            .bodyRow {
+                background-color: #fff;
+
+               .bodyBox {
+                border: 0.1rem solid #E6E6E6;
+                padding: 0.4rem;
+               }
+            }
+        }
+    }

@@ -1,0 +1,68 @@
+@use "../../styles/z-index";
+@use "../../styles/shadow";
+@use "../../styles/font";
+
+.portal {
+    z-index: z-index.$modal;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgb(0 0 0 / 65%);
+    padding: 10rem;
+}
+
+.modal {
+    display: flex;
+    position: relative;
+    top: 50%;
+    flex-direction: column;
+    transform: translateY(-50%);
+    margin-right: auto;
+    margin-left: auto;
+    max-width: var(--max-width);
+    height: fit-content;
+    max-height: calc(100vh - 5rem);
+    overflow: visible;
+    box-shadow: shadow.$shadow-base-1;
+    border-radius: 1.2rem;
+    background: var(--background-light-2);
+    border: 0.1rem solid var(--border-default);
+
+    &:focus-visible {
+        outline: none;
+    }
+
+    .header {
+        @include font.header-m(text-dark-header);
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 2.4rem;
+        padding-bottom: 0;
+
+        &__button {
+            align-self: start;
+            padding: 0.4rem;
+        }
+    }
+
+    .content {
+        @include font.body-m(--text-dark-normal);
+
+        padding: 2.4rem;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+
+    .footer {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 1.6rem 2.4rem 2.4rem
+    }
+}

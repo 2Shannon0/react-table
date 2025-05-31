@@ -1,0 +1,86 @@
+@use "./media";
+
+@mixin media-size {
+    --font-header-l-size: 3.6rem;
+    --font-header-l-line-height: 4.8rem;
+    --font-header-m-size: 2.4rem;
+    --font-header-m-line-height: 3.2rem;
+    --font-header-s-size: 1.8rem;
+    --font-header-s-line-height: 2.6rem;
+    --font-body-m-size: 1.8rem;
+    --font-body-m-line-height: 2.6rem;
+    --font-body-s-size: 1.6rem;
+    --font-body-s-line-height: 2.4rem;
+    --font-body-xs-size: 1.4rem;
+    --font-body-xs-line-height: 2rem;
+}
+
+@mixin header-l($color: text-dark-normal) {
+    line-height: var(--font-header-l-line-height);
+    color: var(#{'--' + $color});
+
+    font: {
+        size: var(--font-header-l-size);
+
+        weight: 600;
+    }
+}
+
+@mixin header-m($color: text-dark-normal) {
+    line-height: var(--font-header-m-line-height);
+    color: var(#{'--' + $color});
+
+    font: {
+        size: var(--font-header-m-size);
+
+        weight: 600;
+    }
+}
+
+@mixin header-s($color: text-dark-normal) {
+    line-height: var(--font-header-s-line-height);
+    color: var(#{'--' + $color});
+
+    font: {
+        size: var(--font-header-s-size);
+
+        weight: 600;
+    }
+}
+
+@mixin body-m($color: text-dark-normal) {
+    line-height: var(--font-body-m-line-height);
+    color: var(#{'--' + $color});
+
+    font: {
+        size: var(--font-body-m-size);
+
+        weight: 400;
+    }
+}
+
+@mixin body-s($color: text-dark-normal) {
+    line-height: var(--font-body-s-line-height);
+    color: var(#{'--' + $color});
+
+    font: {
+        size: var(--font-body-s-size);
+
+        weight: 400;
+    }
+}
+
+@mixin body-xs($color: text-dark-normal) {
+    line-height: var(--font-body-xs-line-height);
+    color: var(#{'--' + $color});
+
+    font: {
+        size: var(--font-body-xs-size);
+
+        weight: 400;
+    }
+}
+
+@mixin body-code($color) {
+    @include body-s($color);
+}

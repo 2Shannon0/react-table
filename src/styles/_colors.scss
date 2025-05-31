@@ -1,0 +1,32 @@
+@use "sass:list";
+
+/* Статус */
+$success: #219128;
+$info: #274FDD;
+$warning: #CC8E00;
+$danger: #9E220C;
+$special: #780C9E;
+
+/* Brand */
+$brand: #234A9B;
+$brand-hover: #3E69C1;
+
+/* Text / Dark */
+$text-dark-header: #0F0F14;
+$text-dark-normal: #4B4B4F;
+$text-dark-caption: #878789;
+
+/* Text / Light */
+$text-light-header: #FFF;
+$text-light-normal: rgba(#FFF, .75);
+$text-light-caption: rgba(#FFF, .8);
+
+/* Border */
+$border-default: #E6E6E6;
+$border-normal: #CCC;
+$border-hover: #A6A6A6;
+
+/* Background */
+$background-light-1: #FFF;
+$background-light-2: #FAFAFA;
+$background-light-hover: #F8F7FE;

@@ -1,0 +1,20 @@
+@use "./styles/container";
+
+.root {
+
+    .container {
+        @include container.default;
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        gap: 2.4rem;
+        margin-top: 5rem;
+
+        .addButton {
+            margin-left: auto;
+        }
+        .table {
+            margin: 0 auto;
+        }
+    }
+}

@@ -1,0 +1,215 @@
+@use "../../styles/font";
+@use "../../styles/shadow";
+
+@mixin button-text-color($color, $hoverColor: $color, $activeColor: $hoverColor) {
+    &,
+    &:link,
+    &:visited,
+    &:focus {
+        color: $color;
+    }
+
+    &:hover {
+        color: $hoverColor;
+    }
+
+    &:active {
+        color: $activeColor;
+    }
+}
+
+@mixin button-outline-color($color, $hoverColor: $color, $activeColor: $hoverColor) {
+    &::before,
+    &:link::before,
+    &:visited::before,
+    &:focus::before {
+        outline: 0.1rem solid $color;
+    }
+
+    &:hover::before {
+        outline: 0.1rem solid $hoverColor;
+    }
+
+    &:active::before {
+        outline: 0.1rem solid $activeColor;
+    }
+}
+
+@mixin button-reset() {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.button {
+    --button-padding: 0.8rem 2rem;
+    --button-radius: 1.2rem;
+    --button-background-color: transparent;
+    --button-background-color-hover: transparent;
+    --button-background-color-active: var(--button-background-color-hover);
+    --button-icon-offset: 0.8rem;
+
+    @include button-reset;
+    @include font.body-m(text-light-header);
+
+    width: fit-content;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    overflow: visible;
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: var(--button-padding);
+    border-radius: var(--button-radius);
+    text: {
+        align: center;
+        decoration: none;
+    }
+
+    white-space: nowrap;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: var(--button-background-color);
+        border-radius: var(--button-radius);
+        transition: background-color 0.15s linear,
+        outline 0.15s linear;
+    }
+
+    &:hover::before {
+        background-color: var(--button-background-color-hover);
+    }
+
+    &:active::before {
+        background-color: var(--button-background-color-active);
+    }
+
+    &:active {
+        transition: none;
+    }
+
+    &_size {
+        &_s {
+            --button-padding: 0.4rem 1.2rem;
+
+            @include font.body-s(text-light-header);
+        }
+
+        &_m {
+            --button-padding: 0.8rem 1.6rem;
+
+            @include font.body-m(text-light-header);
+        }
+    }
+
+    &_mode {
+        &_icon {
+            --button-padding: 0.8rem;
+        }
+    }
+
+    &_mode_icon#{&}_size_s {
+        --button-padding: 0.4rem;
+    }
+
+    &_view {
+        &_primary {
+            --button-background-color: var(--brand-static);
+            --button-background-color-hover: var(--brand-static-hover);
+            --button-background-color-active: var(--brand-static-hover);
+
+            @include button-text-color(var(--text-light-header));
+        }
+
+        &_outlined {
+            --button-background-color: var(--background-light-1);
+            --button-background-color-hover: var(--button-background-color);
+
+            @include button-text-color(var(--text-dark-header));
+            @include button-outline-color(
+                            var(--border-normal),
+                            var(--border-hover),
+            );
+        }
+
+        &_flat {
+            --button-background-color: transparent;
+            --button-background-color-hover: var(--background-light-hover);
+
+            @include button-text-color(
+                            var(--text-dark-header),
+            );
+        }
+    }
+
+    &_disabled {
+        opacity: .6;
+        cursor: default;
+
+        &:hover::before {
+            background-color: var(--button-background-color);
+        }
+    }
+
+    &__children {
+        position: relative;
+    }
+
+    &__icon {
+        display: inline-flex;
+        position: relative;
+        color: inherit;
+
+        &_start {
+            margin-right: var(--button-icon-offset);
+        }
+
+        &_end {
+            margin-left: var(--button-icon-offset);
+        }
+
+        &_clear {
+            margin: 0;
+        }
+    }
+
+    &__loader {
+        border: 0.3rem solid var(--brand-static-hover);
+        border-top: 0.3rem solid transparent;
+        border-right: 0.3rem solid transparent;
+        border-radius: 50%;
+        width: 2.4rem;
+        height: 2.4rem;
+        animation: spin 1s linear infinite;
+    }
+
+    &_size_s & {
+        &__loader {
+            width: 1.8rem;
+            height: 1.8rem;
+        }
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

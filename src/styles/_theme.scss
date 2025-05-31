@@ -1,0 +1,36 @@
+@use 'sass:list';
+
+// Значение - (светлая тема, тёмная тема)
+$theme-map: (
+    success: (#219128, #009b64),
+    info: (#274FDD, #274FDD),
+    warning: (#CC8E00, #CC8E00),
+    danger: (#9E220C, #9E220C),
+    special: (#780C9E, #780C9E),
+    brand-static: (#234A9B, #234A9B),
+    brand-dark: (#0F2D69, #0F2D69),
+    brand-static-hover: (#3E69C1, #3E69C1),
+    text-dark-header: (#0F0F14, #0F0F14),
+    text-dark-normal: (#4B4B4F, #4B4B4F),
+    text-dark-caption: (#878789, #878789),
+    text-light-header: (#FFF, #FFF),
+    text-light-normal: (rgba(#FFF, 0.75), rgba(#FFF, 0.75)),
+    text-light-caption: (rgba(#FFF, 0.8), rgba(#FFF, 0.8)),
+    border-default: (#E6E6E6, #E6E6E6),
+    border-normal: (#CCC, #CCC),
+    border-hover: (#A6A6A6, #A6A6A6),
+    background-light-1: (#FFF, #FFF),
+    background-light-2: (#FAFAFA, #FAFAFA),
+    background-light-blue: (rgb(35 74 155 / 10%), rgb(35 74 155 / 10%)),
+    background-light-hover: (rgba(#0F2D69, 0.03), rgba(#0F2D69, 0.03)),
+);
+$light-theme-number: 1;
+$dark-theme-number: 2;
+
+@mixin theme-variables($theme-number) {
+    @each $key, $value in $theme-map {
+        $key: '--' + $key;
+
+        #{$key}: list.nth($value, $theme-number);
+    }
+}
