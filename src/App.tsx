@@ -6,7 +6,7 @@ import { Button } from './components/Button';
 import { FormModal } from './components/FormModal';
 import { Table } from './components/Table/Table';
 
-const DATA = [['sfd', 'sdfs', 'fdsfs'], ['sfd', 'sdfs', 'fdsfs'], ['sfd', 'sdfs', 'fdsfs']];
+
 
 
 // interface IAppProps { }
@@ -26,7 +26,7 @@ export default function App(): ReactElement {
                     Добавить новую запись
                 </Button>
                 <div className={styles['table']}>
-                    <Table data={DATA} />
+                    <Table />
                 </div>
             </div>
 

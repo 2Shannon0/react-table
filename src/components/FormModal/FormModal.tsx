@@ -66,8 +66,9 @@ export function FormModal({
     const isAppleDevice = detectAppleDevice(navigator.userAgent);
     useEffect(() => {
         // Убираем скролл при открытии модального окна
+        const hasVerticalScrollbar = document.documentElement.scrollHeight > document.documentElement.clientHeight;
         document.documentElement.style.overflow = 'hidden';
-        !isAppleDevice && (document.documentElement.style.paddingRight = '1.7rem');
+        !isAppleDevice && hasVerticalScrollbar && (document.documentElement.style.paddingRight = '1.7rem');
         return () => {
             document.documentElement.style.overflow = '';
             !isAppleDevice && (document.documentElement.style.paddingRight = '');
