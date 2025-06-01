@@ -2,16 +2,11 @@ import { useState } from 'react';
 import { type ReactElement } from 'react';
 
 import styles from './App.module.scss';
+import AddIcon from './assets/images/add.svg?react';
 import { Button } from './components/Button';
 import { FormModal } from './components/FormModal';
 import { Table } from './components/Table/Table';
-// import { Table } from './components/Table/TableInf';
-
-
-
-
-
-// interface IAppProps { }
+import { Title } from './components/Typography';
 
 export default function App(): ReactElement {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +19,7 @@ export default function App(): ReactElement {
                 <Button
                     onClick={handleOpenModal}
                     className={styles['addButton']}
+                    startIcon={<AddIcon width={24} height={24} />}
                 >
                     Добавить новую запись
                 </Button>
@@ -36,9 +32,9 @@ export default function App(): ReactElement {
                 <FormModal
                     onClose={handleCloseModal}
                     Header={(
-                        <div>
-                            Добавление нового поля
-                        </div>
+                        <Title>
+                            Добавление новой записи в таблицу
+                        </Title>
                     )}
                 />
             )}

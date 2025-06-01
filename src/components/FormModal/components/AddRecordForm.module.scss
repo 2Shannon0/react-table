@@ -1,0 +1,30 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    background: var(--background-light-1);
+    padding: 2rem;
+    border-radius: 1.2rem;
+    // background-color: var(--background-light-blue);
+
+    .actions {
+        margin-top: 2rem;
+        display: flex;
+        gap: 2rem;
+
+        .button {
+            display: flex;
+            justify-content: center;
+            width: 50%;
+        }
+    }
+
+    .castomField {
+        margin-top: 4rem;
+        position: relative;
+        display: flex;
+        gap: 2.4rem;
+        padding-bottom: 1rem;
+        align-items: center;
+        border-bottom: 0.1rem solid var(--border-default);
+    }
+}

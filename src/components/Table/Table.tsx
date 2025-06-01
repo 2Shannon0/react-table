@@ -19,12 +19,9 @@ export const Table = (): ReactElement => {
     } = useInfiniteQuery({
         queryKey: ['records'],
         queryFn: ({ pageParam = 1 }) => fetchRecords(pageParam, PAGE_SIZE),
-        getNextPageParam: (lastPage, allPages) =>
-
-            allPages.flatMap(p => p.rows).length >= lastPage.total ? undefined : allPages.length + 1, initialPageParam: 1
+        getNextPageParam: (lastPage, allPages) => allPages.flatMap(p => p.rows).length >= lastPage.total ? undefined : allPages.length + 1, initialPageParam: 1
 
     });
-    console.log('data', data, '\nfetchNextPage', fetchNextPage, '\nhasNextPage', hasNextPage, '\nisFetchingNextPage', isFetchingNextPage, '\nisLoading', isLoading);
 
     if (isLoading) return <CustomSkeleton height={40} count={10} width={700} />;
 

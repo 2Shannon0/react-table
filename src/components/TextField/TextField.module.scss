@@ -1,0 +1,116 @@
+@use "../../styles/font";
+
+.root {
+    --input-background-color: var(--background-light-hover);
+    --input-outline-color: var(--background-light-hover);
+    --input-padding: 0.8rem 1.6rem;
+
+    .error {
+        @include font.body-s(danger);
+
+        display: inline-block;
+        margin-top: 0.4rem;
+    }
+
+    .label {
+        @include font.body-s(text-dark-normal);
+
+        display: inline-block;
+        margin-bottom: 0.6rem;
+    }
+
+    .field {
+        position: relative;
+        font-family: inherit;
+        display: flex;
+        padding: var(--input-padding);
+        cursor: text;
+        outline: 0.1rem solid var(--input-outline-color);
+        background-color: var(--input-background-color);
+        transition: outline 0.1s linear, color 0.1s linear;
+        border-radius: 0.8rem;
+
+        &_size {
+            &_m {
+                @include font.body-m(text-dark-normal);
+            }
+
+            &_s {
+                --input-padding: 0.4rem 0.8rem;
+
+                @include font.body-s(text-dark-normal);
+            }
+        }
+
+        &_view {
+            &_outlined {
+                --input-background-color: var(--background-light-1);
+                --input-outline-color: var(--border-default);
+
+                &:hover {
+                    --input-outline-color: var(--border-normal);
+                }
+            }
+        }
+
+        &_iconed {
+            --input-padding: 0.8rem 1.2rem;
+        }
+
+        &_iconed#{&}_size_s {
+            --input-padding: 0.4rem 0.8rem;
+        }
+
+        &_focus {
+            outline: 0.1rem solid var(--border-normal);
+        }
+
+        &_fill {
+            color: var(--text-dark-caption);
+        }
+
+        &__icon {
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+
+            &_start {
+                margin-right: 1rem;
+            }
+
+            &_end {
+                margin-left: 1rem;
+            }
+
+            &_clear {
+                margin: 0;
+            }
+        }
+
+        &__input {
+            font: {
+                family: inherit;
+                size: inherit;
+            }
+
+            line-height: inherit;
+            width: 100%;
+            padding: 0;
+            resize: none;
+            border: none;
+            background: transparent;
+            outline: none;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: #4B4B4F;
+
+            &::placeholder {
+                color: var(--text-dark-caption)
+            }
+        }
+
+        &__prefix {
+            color: var(--text-dark-normal)
+        }
+    }
+}

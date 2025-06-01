@@ -1,11 +1,11 @@
 import { type PropsWithChildren, type ReactElement, type ReactNode, useEffect } from 'react';
 import ReactModal, { type Styles } from 'react-modal';
 
-import CrossIcon from '../../../public/images/cross.svg?react';
+import CrossIcon from '../../assets/images/cross.svg?react';
 import { detectAppleDevice } from '../../utils/detectDevice';
 import { Button } from '../Button';
+import { AddRecordForm } from './components/AddRecordForm';
 import styles from './FormModal.module.scss';
-
 // Укажите основной элемент приложения
 ReactModal.setAppElement('html');
 
@@ -55,7 +55,6 @@ interface ModalProps {
 export function FormModal({
     Header,
     Footer,
-    children,
     closeButtonText,
     submitButtonText,
     onClose,
@@ -100,7 +99,7 @@ export function FormModal({
             </div>
 
             <div className={styles['content']}>
-                {children}
+                <AddRecordForm onClose={onClose} />
             </div>
 
             {Footer ?? (

@@ -1,0 +1,211 @@
+/* stylelint-disable unit-allowed-list */
+@use "../../styles/media";
+
+.gridItem {
+    padding: calc(var(--spacing, 0) / 2) calc(var(--column-spacing, 0) / 2);
+    box-sizing: border-box;
+    flex-basis: 100%;
+    max-width: 100%;
+
+    @include media.phone {
+        &[data-xs='1'] {
+            flex-basis: 8.33%;
+            max-width: 8.33%;
+        }
+
+        &[data-xs='2'] {
+            flex-basis: 16.66%;
+            max-width: 16.66%;
+        }
+
+        &[data-xs='3'] {
+            flex-basis: 25%;
+            max-width: 25%;
+        }
+
+        &[data-xs='4'] {
+            flex-basis: 33.33%;
+            max-width: 33.33%;
+        }
+
+        &[data-xs='5'] {
+            flex-basis: 41.66%;
+            max-width: 41.66%;
+        }
+
+        &[data-xs='6'] {
+            flex-basis: 50%;
+            max-width: 50%;
+        }
+
+        &[data-xs='7'] {
+            flex-basis: 58.33%;
+            max-width: 58.33%;
+        }
+
+        &[data-xs='8'] {
+            flex-basis: 66.66%;
+            max-width: 66.66%;
+        }
+
+        &[data-xs='9'] {
+            flex-basis: 75%;
+            max-width: 75%;
+        }
+
+        &[data-xs='10'] {
+            flex-basis: 83.33%;
+            max-width: 83.33%;
+        }
+
+        &[data-xs='11'] {
+            flex-basis: 91.66%;
+            max-width: 91.66%;
+        }
+
+        &[data-xs='12'] {
+            flex-basis: 100%;
+            max-width: 100%;
+        }
+    }
+
+    @include media.tablet {
+        &[data-md='1'] {
+            flex-basis: 8.33%;
+            max-width: 8.33%;
+        }
+
+        &[data-md='2'] {
+            flex-basis: 16.66%;
+            max-width: 16.66%;
+        }
+
+        &[data-md='3'] {
+            flex-basis: 25%;
+            max-width: 25%;
+        }
+
+        &[data-md='4'] {
+            flex-basis: 33.33%;
+            max-width: 33.33%;
+        }
+
+        &[data-md='5'] {
+            flex-basis: 41.66%;
+            max-width: 41.66%;
+        }
+
+        &[data-md='6'] {
+            flex-basis: 50%;
+            max-width: 50%;
+        }
+
+        &[data-md='7'] {
+            flex-basis: 58.33%;
+            max-width: 58.33%;
+        }
+
+        &[data-md='8'] {
+            flex-basis: 66.66%;
+            max-width: 66.66%;
+        }
+
+        &[data-md='9'] {
+            flex-basis: 75%;
+            max-width: 75%;
+        }
+
+        &[data-md='10'] {
+            flex-basis: 83.33%;
+            max-width: 83.33%;
+        }
+
+        &[data-md='11'] {
+            flex-basis: 91.66%;
+            max-width: 91.66%;
+        }
+
+        &[data-md='12'] {
+            flex-basis: 100%;
+            max-width: 100%;
+        }
+    }
+}
+
+@media (width >= 1280px) {
+    .gridItem {
+        &[data-md='1'] {
+            flex-basis: 8.33%;
+            max-width: 8.33%;
+        }
+
+        &[data-md='2'] {
+            flex-basis: 16.66%;
+            max-width: 16.66%;
+        }
+
+        &[data-md='3'] {
+            flex-basis: 25%;
+            max-width: 25%;
+        }
+
+        &[data-md='4'] {
+            flex-basis: 33.33%;
+            max-width: 33.33%;
+        }
+
+        &[data-md='5'] {
+            flex-basis: 41.66%;
+            max-width: 41.66%;
+        }
+
+        &[data-md='6'] {
+            flex-basis: 50%;
+            max-width: 50%;
+        }
+
+        &[data-md='7'] {
+            flex-basis: 58.33%;
+            max-width: 58.33%;
+        }
+
+        &[data-md='8'] {
+            flex-basis: 66.66%;
+            max-width: 66.66%;
+        }
+
+        &[data-md='9'] {
+            flex-basis: 75%;
+            max-width: 75%;
+        }
+
+        &[data-md='10'] {
+            flex-basis: 83.33%;
+            max-width: 83.33%;
+        }
+
+        &[data-md='11'] {
+            flex-basis: 91.66%;
+            max-width: 91.66%;
+        }
+
+        &[data-md='12'] {
+            flex-basis: 100%;
+            max-width: 100%;
+        }
+    }
+}
+
+.gridContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: calc(var(--spacing, 0) / -2) calc(var(--column-spacing, 0) / -2);
+
+    .gridItem {
+        &_fill {
+            flex-grow: 1;
+            max-width: 100%;
+        }
+    }
+}
