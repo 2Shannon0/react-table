@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { type ReactElement, useEffect } from 'react';
+import { type ReactElement } from 'react';
 import { FixedSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 
@@ -7,7 +7,7 @@ import { fetchRecords } from '../../api/tablesRecordsApi/api';
 import CustomSkeleton from '../Skeleton/Skeleton';
 import styles from './Table.module.scss';
 
-const PAGE_SIZE = 1000;
+const PAGE_SIZE = 50;
 
 export const Table = (): ReactElement => {
     const {
@@ -20,29 +20,26 @@ export const Table = (): ReactElement => {
         queryKey: ['records'],
         queryFn: ({ pageParam = 1 }) => fetchRecords(pageParam, PAGE_SIZE),
         getNextPageParam: (lastPage, allPages) =>
-            lastPage.length < PAGE_SIZE ? undefined : allPages.length + 1,
-        initialPageParam: 1,
+
+            allPages.flatMap(p => p.rows).length >= lastPage.total ? undefined : allPages.length + 1, initialPageParam: 1
+
     });
     console.log('data', data, '\nfetchNextPage', fetchNextPage, '\nhasNextPage', hasNextPage, '\nisFetchingNextPage', isFetchingNextPage, '\nisLoading', isLoading);
+
     if (isLoading) return <CustomSkeleton height={40} count={10} width={700} />;
+
     const pages = data?.pages ?? [];
-    const header = pages[0]?.[0] ?? [];
-    const rows = pages
-        .flatMap((page) => page.slice(1))
-        .map((row) => {
-            const filledRow = [...row];
-            while (filledRow.length < header.length) {
-                filledRow.push('');
-            }
-            return filledRow;
-        });
+    const header = pages[0]?.header ?? [];
+    const rows = pages.flatMap((page) => page.rows);
 
     return (
         <div className={styles['table']}>
             <div className={styles['head']}>
                 <div className={styles['headRow']}>
                     {header.map((cell, idx) => (
-                        <div key={idx} className={styles['headBox']}>{cell}</div>
+                        <div key={idx} className={styles['headBox']}>
+                            {cell}
+                        </div>
                     ))}
                 </div>
             </div>
@@ -50,7 +47,7 @@ export const Table = (): ReactElement => {
                 <InfiniteLoader
                     isItemLoaded={(index) => index < rows.length}
                     itemCount={hasNextPage ? rows.length + 1 : rows.length}
-                    loadMoreItems={(startIndex, stopIndex) => {
+                    loadMoreItems={() => {
                         if (hasNextPage && !isFetchingNextPage) {
                             return fetchNextPage().then(() => {});
                         }
@@ -69,8 +66,10 @@ export const Table = (): ReactElement => {
                             {({ index, style }) =>
                                 index < rows.length ? (
                                     <div style={style} className={styles['bodyRow']}>
-                                        {rows[index].map((cell, cellIdx) => (
-                                            <div key={cellIdx} className={styles['bodyBox']}>{cell}</div>
+                                        {header.map((key, cellIdx) => (
+                                            <div key={cellIdx} className={styles['bodyBox']}>
+                                                {rows[index][key] ?? ''}
+                                            </div>
                                         ))}
                                     </div>
                                 ) : (
