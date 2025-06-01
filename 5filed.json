@@ -2,7 +2,7 @@
 {
   "records": [
     ["id", "name", "email", "status", "newField"],
-    [1, "Alice Smith", "alice.smith@example.com", "active", "ffs"],
+    [1, "Alice Smith", "alice.smith@example.com", "active", "", "", "123" ],
     [2, "Bob Johnson", "bob.johnson@example.com", "inactive"],
     [3, "Carol White", "carol.white@example.com", "active"],
     [4, "David Brown", "david.brown@example.com", "active"],

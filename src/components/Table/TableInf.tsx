@@ -30,13 +30,6 @@ export const Table = (): ReactElement => {
     const header = pages[0]?.[0] ?? [];
     const rows = pages.flatMap(page => page.slice(1));
 
-    const Row = ({ index, style }) => (
-        <div style={style} className={styles['bodyRow']}>
-            {rows[index].map((cell, cellIdx) => (
-                <div key={cellIdx} className={styles['bodyBox']}>{cell}</div>
-            ))}
-        </div>
-    );
     return (
         <div className={styles['table']}>
             <div className={styles['head']}>
@@ -47,14 +40,13 @@ export const Table = (): ReactElement => {
                 </div>
             </div>
             <div className={styles['body']}>
-                <List
-                    height={600}
-                    itemCount={rows.length}
-                    itemSize={35}
-                    width="100%"
-                >
-                    {Row}
-                </List>
+                {rows.map((row, rowIdx) => (
+                    <div key={rowIdx} className={styles['bodyRow']}>
+                        {row.map((cell, cellIdx) => (
+                            <div key={cellIdx} className={styles['bodyBox']}>{cell}</div>
+                        ))}
+                    </div>
+                ))}
             </div>
         </div>
     );

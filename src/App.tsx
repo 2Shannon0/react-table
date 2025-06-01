@@ -5,6 +5,8 @@ import styles from './App.module.scss';
 import { Button } from './components/Button';
 import { FormModal } from './components/FormModal';
 import { Table } from './components/Table/Table';
+// import { Table } from './components/Table/TableInf';
+
 
 
 
