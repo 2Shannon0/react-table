@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import type { ReactElement } from 'react';
+import { type ReactElement, useEffect } from 'react';
 import { FixedSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 
@@ -23,20 +23,20 @@ export const Table = (): ReactElement => {
             lastPage.length < PAGE_SIZE ? undefined : allPages.length + 1,
         initialPageParam: 1,
     });
-
+    console.log('data', data, '\nfetchNextPage', fetchNextPage, '\nhasNextPage', hasNextPage, '\nisFetchingNextPage', isFetchingNextPage, '\nisLoading', isLoading);
     if (isLoading) return <CustomSkeleton height={40} count={10} width={700} />;
-
     const pages = data?.pages ?? [];
     const header = pages[0]?.[0] ?? [];
-    const rows = pages.flatMap(page => page.slice(1));
+    const rows = pages
+        .flatMap((page) => page.slice(1))
+        .map((row) => {
+            const filledRow = [...row];
+            while (filledRow.length < header.length) {
+                filledRow.push('');
+            }
+            return filledRow;
+        });
 
-    const Row = ({ index, style }) => (
-        <div style={style} className={styles['bodyRow']}>
-            {rows[index].map((cell, cellIdx) => (
-                <div key={cellIdx} className={styles['bodyBox']}>{cell}</div>
-            ))}
-        </div>
-    );
     return (
         <div className={styles['table']}>
             <div className={styles['head']}>
@@ -47,14 +47,41 @@ export const Table = (): ReactElement => {
                 </div>
             </div>
             <div className={styles['body']}>
-                <List
-                    height={600}
-                    itemCount={rows.length}
-                    itemSize={35}
-                    width="100%"
+                <InfiniteLoader
+                    isItemLoaded={(index) => index < rows.length}
+                    itemCount={hasNextPage ? rows.length + 1 : rows.length}
+                    loadMoreItems={(startIndex, stopIndex) => {
+                        if (hasNextPage && !isFetchingNextPage) {
+                            return fetchNextPage().then(() => {});
+                        }
+                        return Promise.resolve();
+                    }}
                 >
-                    {Row}
-                </List>
+                    {({ onItemsRendered, ref }) => (
+                        <List
+                            height={600}
+                            itemCount={hasNextPage ? rows.length + 1 : rows.length}
+                            itemSize={50}
+                            width="100%"
+                            onItemsRendered={onItemsRendered}
+                            ref={ref}
+                        >
+                            {({ index, style }) =>
+                                index < rows.length ? (
+                                    <div style={style} className={styles['bodyRow']}>
+                                        {rows[index].map((cell, cellIdx) => (
+                                            <div key={cellIdx} className={styles['bodyBox']}>{cell}</div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div style={style} className={styles['bodyRow']}>
+                                        <div className={styles['bodyBox']}>Загрузка...</div>
+                                    </div>
+                                )
+                            }
+                        </List>
+                    )}
+                </InfiniteLoader>
             </div>
         </div>
     );
